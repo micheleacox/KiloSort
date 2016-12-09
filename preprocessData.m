@@ -49,7 +49,7 @@ else
     kcoords = ones(ops.Nchan, 1);
 end
 NchanTOT = ops.NchanTOT;
-NT       = ops.NT ;
+NT       = ops.NT ; % this is the batch size
 
 rez.ops         = ops;
 rez.xc = xc;
@@ -134,7 +134,7 @@ while 1
     end
     dataRAW = dataRAW';
     dataRAW = single(dataRAW);
-    dataRAW = dataRAW(:, chanMapConn);
+    dataRAW = dataRAW(:, chanMapConn); % re-arranges data relative to chanel MAP
     
     datr = filter(b1, a1, dataRAW);
     datr = flipud(datr);
