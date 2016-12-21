@@ -1,6 +1,8 @@
+clear; close all; 
+
 useGPU = 1; % do you have a GPU? Kilosorting 1000sec of 32chan simulated data takes 55 seconds on gtx 1080 + M2 SSD.
 
-fpath    = '/Users/coxm/Documents/SpikeSorting/DATA/Spikes/eMouse/'; % where on disk do you want the simulation? ideally and SSD...
+fpath    = '/Users/coxm/Documents/SpikeSorting/DATA/eMouseDemo/'; % where on disk do you want the simulation? ideally and SSD...
 if ~exist(fpath, 'dir'); mkdir(fpath); end
 
 % This part adds paths
@@ -11,15 +13,17 @@ pathToYourConfigFile = '/Users/coxm/Documents/SpikeSorting/KiloSort/eMouse/'; % 
 % Run the configuration file, it builds the structure of options (ops)
 run(fullfile(pathToYourConfigFile, 'config_eMouse.m'))
 
-% This part makes the channel map for this simulation
-make_eMouseChannelMap(fpath); 
+% % This part makes the channel map for this simulation
+% make_eMouseChannelMap(fpath); 
+% 
+% % This part simulates and saves data. There are many options you can change inside this 
+% % function, if you want to vary the SNR or firing rates, or number of cells etc. 
+% % You can vary these to make the simulated data look more like your data.
+% % Currently it is set to relatively low SNR for illustration purposes in Phy. 
+% make_eMouseData(fpath, useGPU); 
 
-% This part simulates and saves data. There are many options you can change inside this 
-% function, if you want to vary the SNR or firing rates, or number of cells etc. 
-% You can vary these to make the simulated data look more like your data.
-% Currently it is set to relatively low SNR for illustration purposes in Phy. 
-make_eMouseData(fpath, useGPU); 
-%
+
+
 % This part runs the normal Kilosort processing on the simulated data
 [rez, DATA, uproj] = preprocessData(ops); % preprocess data and extract spikes for initialization
 rez                = fitTemplates(rez, DATA, uproj);  % fit templates iteratively
