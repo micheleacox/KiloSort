@@ -1,0 +1,9 @@
+Open Terminal, activate your Phy environment:
+
+$  source activate phy
+Ensure that the current directory contains your raw data binaries, sorted spikes and params.py file.
+
+$  cd /your/path/here/
+Run the Template-GUI:
+
+$  phy template-gui params.py
