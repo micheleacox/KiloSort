@@ -25,6 +25,9 @@ if ~isempty(ops.chanMap)
         if exist('fs', 'var')
             ops.fs       = getOr(ops, 'fs', fs);
         end
+        if exist('chanMapLabels', 'var') % MAC, for Maier Lab, Dec 22
+            ops.chanMapLabels       = getOr(ops, 'chanMapLabels', chanMapLabels);
+        end
     else
         chanMap = ops.chanMap;
         chanMapConn = ops.chanMap;
